@@ -59,13 +59,13 @@ class FullScheduleFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val busStopAdapter = BusStopAdapter({
+        val busStopAdapter = BusStopAdapter {
             val action = FullScheduleFragmentDirections
                 .actionFullScheduleFragmentToStopScheduleFragment(
-                stopName = it.stopName
-            )
+                    stopName = it.stopName
+                )
             view.findNavController().navigate(action)
-        })
+        }
         recyclerView.adapter = busStopAdapter
         lifecycle.coroutineScope.launch {
             viewModel.fullSchedule().collect() {
